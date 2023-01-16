@@ -15,13 +15,12 @@ module Hyrax
           Hyrax::V2GraphIndexer::NestedCollectionQueryServiceDecorator::ClassMethods
         )
 
-        Hyrax::WorkBehavior.prepend(
-          Hyrax::V2GraphIndexer::CollectionNestingDecorator
-        )
-
-        Hyrax::CollectionBehavior.prepend(
-          Hyrax::V2GraphIndexer::CollectionNestingDecorator
-        )
+        ActiveFedora::Base.subclasses.each do |subclass|
+          if subclass.included_modules.include?(Hyrax::WorkBehavior) ||
+              subclass.included_modules.include?(Hyrax::CollectionBehavior)
+            subclass.prepend(Hyrax::V2GraphIndexer::CollectionNestingDecorator)
+          end
+        end
 
         Hyrax::Dashboard::NestedCollectionsSearchBuilder.prepend(
           Hyrax::V2GraphIndexer::NestedCollectionsSearchBuilderDecorator
