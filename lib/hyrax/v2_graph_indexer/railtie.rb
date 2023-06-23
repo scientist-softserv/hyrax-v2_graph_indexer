@@ -2,7 +2,7 @@ module Hyrax
   module V2GraphIndexer
     class Railtie < ::Rails::Railtie
 
-      config.to_prepare do
+      config.after_initialize do
         Hyrax::Collections::NestedCollectionPersistenceService.singleton_class.prepend(
           Hyrax::V2GraphIndexer::NestedCollectionPersistenceServiceDecorator::ClassMethods
         )
