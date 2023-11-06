@@ -25,6 +25,10 @@ module Hyrax
         Hyrax::Dashboard::NestedCollectionsSearchBuilder.prepend(
           Hyrax::V2GraphIndexer::NestedCollectionsSearchBuilderDecorator
         )
+
+        Hyrax.config do |c|
+          c.nested_relationship_reindexer = ->(id:, extent:) {}
+        end
       end
     end
   end
