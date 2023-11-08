@@ -26,6 +26,18 @@ Or install it yourself as:
 $ gem install hyrax-v2_graph_indexer
 ```
 
+### Prior to v0.5.0
+
+For this to work, you'll need to add the following to your application's `./config/initializers/hyrax.rb`:
+
+```ruby
+Hyrax.config do |config|
+  config.nested_relationship_reindexer = ->(id:, extent:) {}
+end
+```
+
+With the upcoming v0.5.0, the above will be automatically added via the [Hyrax::V2GraphIndexer::Railtie](./lib/hyrax/v2_graph_indexer/railtie.rb).
+
 ## Contributing
 
 ## Discussion
